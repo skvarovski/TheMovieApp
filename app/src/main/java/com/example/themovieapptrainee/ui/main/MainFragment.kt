@@ -50,7 +50,6 @@ class MainFragment : Fragment(), FilmAdapter.CallbackListener {
     }
 
     override fun onClickItem(item: MovieEntity) {
-        Toast.makeText(activity, "click on ${item.description}", Toast.LENGTH_SHORT).show()
         val bundle = Bundle().apply {
             putInt("film_id", item.id)
         }

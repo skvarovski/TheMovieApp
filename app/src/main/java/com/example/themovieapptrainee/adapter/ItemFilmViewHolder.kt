@@ -8,14 +8,19 @@ import com.example.themovieapptrainee.model.MovieEntity
 
 class ItemFilmViewHolder(
     private val binding: ItemFilmBinding,
-    private val context: Context
+    private val context: Context,
+    private val listener: FilmAdapter.CallbackListener? = null,
 ) : ViewHolder(binding.root) {
     fun bind(item: MovieEntity) {
+        binding.root.setOnClickListener {
+            listener?.onClickItem(item)
+        }
         with(binding) {
             filmName.text = item.title
             filmYear.text = item.year
             filmRating.text = item.rating
             filmDescription.text = item.description
-            Glide.with(context).load(item.imageUrl).into(filmImage) }
+            Glide.with(context).load(item.imageUrl).into(filmImage)
+        }
     }
 }

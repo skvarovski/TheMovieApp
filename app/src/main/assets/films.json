@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Звёздные войны 1",
+    "year": "2009",
+    "rating": "9.3",
+    "image_url": "sw1.jpeg",
+    "description": ""
+  },
+  {
+    "id": 2,
+    "title": "Звёздные войны 2",
+    "year": "2004",
+    "rating": "7.3",
+    "image_url": "sw2.jpeg",
+    "description": ""
+  }
+]

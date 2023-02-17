@@ -25,7 +25,7 @@
         android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Тестовое название фильма"
+        tools:text="Тестовое название фильма"
         android:textSize="16sp"
         />
 
@@ -36,7 +36,7 @@
         android:layout_marginStart="170dp"
 
         android:layout_marginTop="30dp"
-        android:text="Год: 2020"
+        tools:text="Год: 2020"
         />
     <TextView
         android:id="@+id/film_rating"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
         android:layout_marginTop="30dp"
-        android:text="IMDB: 8.4"
+        tools:text="IMDB: 8.4"
         />
 
     <TextView
@@ -55,7 +55,7 @@
         android:layout_marginTop="60dp"
         android:ellipsize="end"
         android:maxLines="6"
-        android:text="В далёкой-далёкой галлактике, там где джедаи бороздили просторы вселенной - жил маленький Оби Ван-киноби и была у него супер-сила. Вдруг к нему прилетели люди из Конфедерации и заметили его спобобности, так началась история Звёздных Войн."
+        tools:text="В далёкой-далёкой галлактике, там где джедаи бороздили просторы вселенной - жил маленький Оби Ван-киноби и была у него супер-сила. Вдруг к нему прилетели люди из Конфедерации и заметили его спобобности, так началась история Звёздных Войн."
         />
 
 

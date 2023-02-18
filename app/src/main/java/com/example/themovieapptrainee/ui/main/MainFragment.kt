@@ -1,12 +1,15 @@
 package com.example.themovieapptrainee.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +17,7 @@ import com.example.themovieapptrainee.R
 import com.example.themovieapptrainee.adapter.FilmAdapter
 import com.example.themovieapptrainee.databinding.FragmentMainBinding
 import com.example.themovieapptrainee.model.MovieEntity
+import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(), FilmAdapter.CallbackListener {
 
@@ -39,14 +43,28 @@ class MainFragment : Fragment(), FilmAdapter.CallbackListener {
         }
         filmAdapter = FilmAdapter()
         setupView()
+        setupObserver()
     }
+
     private fun setupView() {
         // orderAdapter.initCallbackListener(this)
         binding.rvAdapter.adapter = filmAdapter
         filmAdapter.initListener(this)
         binding.rvAdapter.layoutManager = LinearLayoutManager(context)
+        mainActivityViewModel.getFilmFromRepository()
+    }
 
-        filmAdapter.items = mainActivityViewModel.generateItems()
+    fun setupObserver() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mainActivityViewModel.filmItems.collect { items ->
+                    run {
+                        filmAdapter.items = items
+                        Log.d("TEST", "observer...")
+                    }
+                }
+            }
+        }
     }
 
     override fun onClickItem(item: MovieEntity) {

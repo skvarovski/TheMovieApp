@@ -7,4 +7,6 @@ Android Trainee Course by @ermolnik
 # Task 2
 ![Screenshot](https://github.com/skvarovski/TheMovieApp/raw/task2/screenshot/screenshot_main_task2.png)
 # Task 3
-![Screenshot](https://github.com/skvarovski/TheMovieApp/raw/task2/screenshot/screenshot_detail_fragment.png)
+![Screenshot](https://github.com/skvarovski/TheMovieApp/raw/task3/screenshot/screenshot_detail_fragment.png)
+# Task 4
+![Screenshot](https://github.com/skvarovski/TheMovieApp/raw/task4/screenshot/screenshot_task4.png)

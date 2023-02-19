@@ -13,8 +13,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.themovieapptrainee.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var viewModel: MainViewModel
 
@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navHostFragment.navController, appBarConfiguration)
         binding.bottomMenu.setupWithNavController(navController)
+
+        // viewModel.getFilmFromRepository()
     }
 
     override fun onSupportNavigateUp(): Boolean {

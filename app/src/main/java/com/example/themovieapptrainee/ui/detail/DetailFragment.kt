@@ -1,14 +1,19 @@
 package com.example.themovieapptrainee.ui.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.bumptech.glide.Glide
 import com.example.themovieapptrainee.MainViewModel
 import com.example.themovieapptrainee.databinding.FragmentDetailBinding
-import com.example.themovieapptrainee.model.MovieEntity
+import kotlinx.coroutines.launch
 
 class DetailFragment : Fragment() {
 
@@ -33,24 +38,36 @@ class DetailFragment : Fragment() {
         mainActivityViewModel = requireActivity().let {
             ViewModelProvider(it)[com.example.themovieapptrainee.MainViewModel::class.java]
         }
+        mainActivityViewModel.getFilmFromRepository()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val item = mainActivityViewModel.generateItems().filter { it.id == filmId }.first()
-        setupView(item)
+
+        setupObserver()
     }
 
-    private fun setupView(item: MovieEntity) {
-        with(binding) {
-            filmTitle.text = item.title
-            filmYear.text = item.year
-            filmRating.text = item.rating
-            filmDescription.text = item.description
-            filmImage.setImageURI(item.imageUrl)
+    private fun setupObserver() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mainActivityViewModel.filmItems.collect { items ->
+                    if (items.isNotEmpty()) {
+                        Log.d("TEST", "observer details...")
+                        run {
+                            val item = items.first { it.id == filmId }
+                            with(binding) {
+                                filmTitle.text = item.title
+                                filmYear.text = item.year
+                                filmRating.text = item.rating
+                                filmDescription.text = item.description
+                                context?.let { Glide.with(it).load(item.imageUrl).into(filmImage) }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

@@ -38,7 +38,7 @@ class DetailFragment : Fragment() {
         mainActivityViewModel = requireActivity().let {
             ViewModelProvider(it)[com.example.themovieapptrainee.MainViewModel::class.java]
         }
-        mainActivityViewModel.getFilmFromRepository()
+        // mainActivityViewModel.getFilmFromRepository()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,14 +50,14 @@ class DetailFragment : Fragment() {
     private fun setupObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainActivityViewModel.filmItems.collect { items ->
+                mainActivityViewModel.movieItems.collect { items ->
                     if (items.isNotEmpty()) {
                         Log.d("TEST", "observer details...")
                         run {
                             val item = items.first { it.id == filmId }
                             with(binding) {
                                 filmTitle.text = item.title
-                                filmYear.text = item.year
+                                //filmYear.text = item.year
                                 filmRating.text = item.rating
                                 filmDescription.text = item.description
                                 context?.let { Glide.with(it).load(item.imageUrl).into(filmImage) }

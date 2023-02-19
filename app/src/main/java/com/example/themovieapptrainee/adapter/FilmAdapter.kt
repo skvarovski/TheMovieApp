@@ -5,18 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.themovieapptrainee.databinding.ItemFilmBinding
-import com.example.themovieapptrainee.model.MovieEntity
+import com.example.themovieapptrainee.databinding.ItemFilmNewBinding
+import com.example.themovieapptrainee.model.TheMovieEntity
 import com.example.themovieapptrainee.ui.main.MainFragment
 
-class FilmAdapter : ListAdapter<MovieEntity, ItemFilmViewHolder>(ItemsDiffItemCallback) {
+class FilmAdapter : ListAdapter<TheMovieEntity, ItemFilmViewHolder>(ItemsDiffItemCallback) {
 
     var listener: CallbackListener? = null
-    var items: List<MovieEntity>
+    var items: List<TheMovieEntity>
         get() = currentList
         set(value) = submitList(value)
 
     interface CallbackListener {
-        fun onClickItem(item: MovieEntity)
+        fun onClickItem(item: TheMovieEntity)
     }
 
     fun initListener(fragment: MainFragment) {
@@ -25,7 +26,7 @@ class FilmAdapter : ListAdapter<MovieEntity, ItemFilmViewHolder>(ItemsDiffItemCa
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemFilmViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemFilmBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemFilmNewBinding.inflate(layoutInflater, parent, false)
         return ItemFilmViewHolder(binding, parent.context, listener)
     }
 
@@ -35,17 +36,17 @@ class FilmAdapter : ListAdapter<MovieEntity, ItemFilmViewHolder>(ItemsDiffItemCa
 
     private companion object {
 
-        private object ItemsDiffItemCallback : DiffUtil.ItemCallback<MovieEntity>() {
+        private object ItemsDiffItemCallback : DiffUtil.ItemCallback<TheMovieEntity>() {
 
-            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+            override fun areItemsTheSame(oldItem: TheMovieEntity, newItem: TheMovieEntity): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+            override fun areContentsTheSame(oldItem: TheMovieEntity, newItem: TheMovieEntity): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
 
-            override fun getChangePayload(oldItem: MovieEntity, newItem: MovieEntity) = Any()
+            override fun getChangePayload(oldItem: TheMovieEntity, newItem: TheMovieEntity) = Any()
         }
     }
 }

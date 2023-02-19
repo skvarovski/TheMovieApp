@@ -3,24 +3,27 @@ package com.example.themovieapptrainee.adapter
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.themovieapptrainee.databinding.ItemFilmBinding
-import com.example.themovieapptrainee.model.MovieEntity
+import com.example.themovieapptrainee.databinding.ItemFilmNewBinding
+import com.example.themovieapptrainee.model.TheMovieEntity
 
 class ItemFilmViewHolder(
-    private val binding: ItemFilmBinding,
+    private val binding: ItemFilmNewBinding,
     private val context: Context,
     private val listener: FilmAdapter.CallbackListener? = null,
 ) : ViewHolder(binding.root) {
-    fun bind(item: MovieEntity) {
+    fun bind(item: TheMovieEntity) {
         binding.root.setOnClickListener {
             listener?.onClickItem(item)
         }
         with(binding) {
-            filmName.text = item.title
-            filmYear.text = item.year
-            filmRating.text = item.rating
-            filmDescription.text = item.description
-            Glide.with(context).load(item.imageUrl).into(filmImage)
+            itemTitle.text = item.title
+            // filmYear.text = item.
+            // item.text = item.rating
+            itemDescription.text = item.description
+            Glide
+                .with(context)
+                .load(item.imageUrl)
+                .into(itemImage)
         }
     }
 }

@@ -2,7 +2,7 @@ package com.example.themovieapptrainee.data
 
 import android.content.Context
 import android.net.Uri
-import com.example.themovieapptrainee.model.MovieEntity
+import com.example.themovieapptrainee.model.TheMovieEntity
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
@@ -39,32 +39,32 @@ class Repository(private val context: Context) {
         return retrofit.create(FilmAPI::class.java)
     }
 
-    suspend fun getFilms(): Flow<DataState<List<MovieEntity>>> = flow {
+    suspend fun getMovies(): Flow<DataState<List<TheMovieEntity>>> = flow {
         emit(DataState.loading())
         try {
-            val filmResponse = retrofitBuilder().getFilms()
-            if (filmResponse.isSuccessful && filmResponse.body() != null) {
-                val movieList = mutableListOf<MovieEntity>()
-                filmResponse.body()?.forEach { item ->
+            val apiResponse = retrofitBuilder().getMovies()
+            if (apiResponse.isSuccessful && apiResponse.body() != null) {
+                val movieList = mutableListOf<TheMovieEntity>()
+                apiResponse.body()?.forEach { item ->
                     movieList.add(
-                        MovieEntity(
+                        TheMovieEntity(
                             id = item.id,
                             title = item.title,
-                            year = item.year,
                             rating = item.rating,
-                            imageUrl = Uri.parse("$host/images/sw/${item.imageUrl}"),
+                            imageUrl = "$host/images/themovieapp/${item.imageUrl}",
                             description = item.description,
+                            forAge = item.forAge,
                         ),
                     )
                 }
-                if (movieList.isEmpty()) {
-                    emit(DataState.error("Empty list"))
-                } else {
+                if (movieList.isNotEmpty()) {
                     emit(DataState.success(movieList.toList()))
+                } else {
+                    emit(DataState.error("List empty"))
                 }
             }
         } catch (e: java.lang.Exception) {
-            emit(DataState.error("try-catch error ${e.message}"))
+            emit(DataState.error(e.message ?: "error try-catch"))
         }
     }.flowOn(Dispatchers.IO)
 }

@@ -2,4 +2,6 @@
     <string name="app_name">TheMovieAppTrainee</string>
     <string name="navbar_main_text">Главная</string>
     <string name="navbar_profile_text">Профиль</string>
+    <string name="main_search_button">Search button</string>
+    <string name="main_text_popular_now">Популярное сейчас</string>
 </resources>

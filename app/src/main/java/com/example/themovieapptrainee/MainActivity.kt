@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
-        setupActionBarWithNavController(navHostFragment.navController, appBarConfiguration)
+        // setupActionBarWithNavController(navHostFragment.navController, appBarConfiguration)
         binding.bottomMenu.setupWithNavController(navController)
 
         // viewModel.getFilmFromRepository()

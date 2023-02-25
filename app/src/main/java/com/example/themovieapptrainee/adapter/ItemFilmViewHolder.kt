@@ -17,8 +17,6 @@ class ItemFilmViewHolder(
         }
         with(binding) {
             itemTitle.text = item.title
-            // filmYear.text = item.
-            // item.text = item.rating
             itemDescription.text = item.description
             Glide
                 .with(context)

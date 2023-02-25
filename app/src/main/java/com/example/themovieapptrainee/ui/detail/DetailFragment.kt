@@ -38,7 +38,6 @@ class DetailFragment : Fragment() {
         mainActivityViewModel = requireActivity().let {
             ViewModelProvider(it)[com.example.themovieapptrainee.MainViewModel::class.java]
         }
-        // mainActivityViewModel.getFilmFromRepository()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
